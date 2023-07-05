@@ -11,17 +11,17 @@ const Category = () => {
 
   useEffect(() => {
     dispatch(getCategories())
-  }, [])
+  }, [dispatch])
 
   return (
-    <div className='w-1/6 bg-gray-100 p-4'>
-      <div className='border-b pb-2 text-xl font-bold'>
+    <div className='w-1/6 bg-gray-100 p-4 max-h-screen'>
+      <div className='border-b pb-2 text-xl font-bold px-2'>
         KATEGORİ
       </div >
       {categories?.map((item, index) => {
         return (
           <div
-            className='text-lg mt-2 cursor-pointer hover:bg-gray-200 p-2'
+            className='text-lg cursor-pointer hover:bg-gray-200 p-2'
             key={index}>
             {item}
           </div>
