@@ -46,8 +46,8 @@ const cartSlice = createSlice({
 
         },
         removeFromCart: (state, action) => {
-            const tempCard = state.carts.filter(item => item.id !== action.payload.id)
-            state.carts.push(tempCard);
+            const tempCard = state.carts.filter(item => item.id !== action.payload)
+            state.carts = tempCard;
             storeInLocalStorage(state.carts);
         },
         clearCart: (state) => {
@@ -56,7 +56,7 @@ const cartSlice = createSlice({
         },
         getCartTotal: (state) => {
             state.totalAmount = state.carts.reduce((cartTotal, cartItem) => {
-                return cartTotal += cartItem.totalPrice;
+                return cartTotal += cartItem.price* cartItem.quantity;
             }, 0)
 
             state.itemCount = state.carts.length;
