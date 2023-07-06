@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CustomSlider from '../components/home/CustomSlider'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -14,10 +14,10 @@ const Home = () => {
     return (
         <div>
             <CustomSlider />
-            <Sorting />
+            <Sorting setSort={setSort} />
             <div className='flex'>
-                <Category />
-                <Products />
+                <Category setCategory={setCategory} />
+                <Products category={category} sort={sort} />
             </div>
         </div>
     )

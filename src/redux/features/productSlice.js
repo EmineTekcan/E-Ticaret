@@ -11,11 +11,21 @@ const initialState = {
 
 export const getProducts = createAsyncThunk("getproducts", async () => {
     try {
-        const response = await fetch("https://fakestoreapi.com/products");
+        const response = await fetch(`https://fakestoreapi.com/products`);
         const data = await response.json();
         return data;
     } catch (error) {
         console.log("products error " + error);
+    }
+})
+
+export const getCategoryProducts = createAsyncThunk("getCategoryProducts", async (category) => {
+    try {
+        const response = await fetch(`https://fakestoreapi.com/products/category/${category}`)
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log("category products error " + error);
     }
 })
 
@@ -55,6 +65,16 @@ const productSlice = createSlice({
             .addCase(getProductDetail.fulfilled, (state, action) => {
                 state.productDetailStatus = STATUS.SUCCESS;
                 state.productDetail = action.payload
+            })
+            .addCase(getCategoryProducts.pending, (state, action) => {
+                state.productStatus = STATUS.LOADING
+            })
+            .addCase(getCategoryProducts.rejected, (state) => {
+                state.productStatus = STATUS.FAIL
+            })
+            .addCase(getCategoryProducts.fulfilled, (state, action) => {
+                state.products = action.payload;
+                state.productStatus = STATUS.SUCCESS;
             })
     }
 })
